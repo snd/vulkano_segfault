@@ -1,0 +1,11 @@
+[package]
+name = "vulkano_segfault"
+version = "0.1.0"
+authors = ["Maximilian Krüger <kruemaxi@googlemail.com>"]
+
+[dependencies]
+vulkano = { git = "https://github.com/vulkano-rs/vulkano" }
+vulkano-win = { git = "https://github.com/vulkano-rs/vulkano" }
+winit = "0.13.1"
+clock_ticks = "0.1.1"
+glsl-to-spirv = { git = "https://github.com/vulkano-rs/vulkano" }

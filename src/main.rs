@@ -319,26 +319,26 @@ fn main() {
     #[derive(Debug, Copy, Clone)]
     struct FragmentShaderLayout(vk::descriptor::descriptor::ShaderStages);
     unsafe impl vk::descriptor::pipeline_layout::PipelineLayoutDesc for FragmentShaderLayout {
-        fn num_sets(&self) -> usize { 1 }
+        fn num_sets(&self) -> usize { 0 }
         fn num_bindings_in_set(&self, set: usize) -> Option<usize> {
             match set {
-                0 => Some(1),
+                // 0 => Some(1),
                 _ => None
             }
         }
         fn descriptor(&self, set: usize, binding: usize) -> Option<vk::descriptor::descriptor::DescriptorDesc> {
             match (set, binding) {
-                (0, 0) => Some(vk::descriptor::descriptor::DescriptorDesc {
-                    ty: vk::descriptor::descriptor::DescriptorDescTy::Buffer(
-                        vk::descriptor::descriptor::DescriptorBufferDesc {
-                            dynamic: Some(true),
-                            storage: true
-                        }
-                    ),
-                    array_count: 1,
-                    stages: vk::descriptor::descriptor::ShaderStages::all(),
-                    readonly: true,
-                }),
+                // (0, 0) => Some(vk::descriptor::descriptor::DescriptorDesc {
+                //     ty: vk::descriptor::descriptor::DescriptorDescTy::Buffer(
+                //         vk::descriptor::descriptor::DescriptorBufferDesc {
+                //             dynamic: Some(true),
+                //             storage: true
+                //         }
+                //     ),
+                //     array_count: 1,
+                //     stages: vk::descriptor::descriptor::ShaderStages::all(),
+                //     readonly: true,
+                // }),
                 _ => None,
             }
         }
@@ -432,13 +432,13 @@ fn main() {
         .expect("failed to allocate autocorrelation_buffer ")
     };
 
-    let descriptor_set_id = 0;
-    let descriptor_set = Arc::new(vk::descriptor::descriptor_set::PersistentDescriptorSet::start(pipeline.clone(), descriptor_set_id)
-        .add_buffer(autocorrelation_buffer.clone()).unwrap()
-        .build().unwrap()
-    );
-
-    println!("descriptor description = {:?}", descriptor_set.descriptor(0));
+    // let descriptor_set_id = 0;
+    // let descriptor_set = Arc::new(vk::descriptor::descriptor_set::PersistentDescriptorSet::start(pipeline.clone(), descriptor_set_id)
+    //     .add_buffer(autocorrelation_buffer.clone()).unwrap()
+    //     .build().unwrap()
+    // );
+    //
+    // println!("descriptor description = {:?}", descriptor_set.descriptor(0));
 
     let framebuffers: Vec<_> = images
         .iter()
@@ -467,8 +467,8 @@ fn main() {
         let push_constants = (secs_since_start as f32, dimensions[0] as f32, dimensions[1] as f32);
         // let push_constants = ();
 
-        let descriptor_sets = (descriptor_set.clone());
-        // let descriptor_sets = ();
+        // let descriptor_sets = (descriptor_set.clone());
+        let descriptor_sets = ();
 
         let command_buffer = vk::command_buffer::AutoCommandBufferBuilder::new(
                 device.clone(),

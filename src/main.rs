@@ -331,8 +331,8 @@ fn main() {
                 (0, 0) => Some(vk::descriptor::descriptor::DescriptorDesc {
                     ty: vk::descriptor::descriptor::DescriptorDescTy::Buffer(
                         vk::descriptor::descriptor::DescriptorBufferDesc {
-                            dynamic: Some(true),
-                            storage: true
+                            dynamic: Some(false),
+                            storage: false
                         }
                     ),
                     array_count: 1,
